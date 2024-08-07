@@ -1,32 +1,46 @@
 import React from 'react'
-import {formatter} from '../util/investment.js'
+import { calculateInvestmentResults, formatter } from '../util/investment.js'
 
-const Result = ({dataForTable}) => {
+const Result = ({data}) => {
 
-  console.log(typeof(dataForTable))
-  console.log(dataForTable)
+  const results = calculateInvestmentResults(data);
+  const initialInvestment = 
+    results[0].valueEndOfYear -
+    results[0].interest -
+    results[0].annualInvestment; 
+  console.log(results)
+
   
   return (
     <table id='result'>
       <thead>
         <tr>
-          <td>Year</td>
-          <td>Investment Value</td>
-          <td>Interest (Year)</td>
-          <td>Total Interest</td>
-          <td>Invested Capital</td>
+          <th>Year</th>
+          <th>Investment Value</th>
+          <th>Interest (Year)</th>
+          <th>Total Interest</th>
+          <th>Invested Capital</th>
         </tr>
       </thead>
       <tbody>
           {
-            dataForTable.map((x,i) => 
-              <tr>
-                <td>{i+1}</td>
-                <td>{formatter.format(x.valueEndOfYear)}</td>
-                <td>{formatter.format(x.interest)}</td>
-                <td>{formatter.format(x.interest)}</td>
-                <td>{formatter.format(x.interest)}</td>
-              </tr>
+            results.map(yearData => {
+              const totalInterest = 
+                yearData.valueEndOfYear - 
+                (yearData.annualInvestment * yearData.year) -
+                initialInvestment;
+              
+              
+              return(
+                <tr key={yearData.year}>  
+                  <td>{yearData.year}</td>
+                  <td>{formatter.format(yearData.valueEndOfYear)}</td>
+                  <td>{formatter.format(yearData.interest)}</td>
+                  <td>{formatter.format(totalInterest)}</td>
+                  <td>{formatter.format(yearData.valueEndOfYear - totalInterest)}</td>
+                </tr>
+              )
+            } 
             )
           }
       </tbody>

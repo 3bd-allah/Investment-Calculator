@@ -2,26 +2,32 @@ import './index.css'
 import Header from './components/Header.jsx'
 import CalculatorForm from './components/CalculatorForm.jsx'
 import Result from './components/Result.jsx'
-import {calculateInvestmentResults} from './util/investment.js'
 import { useState } from 'react'
 
 function App() {
   
-  const [investmentResults, setInvestmentResults] = useState([])
+  const [investmentData, setInvestmentData] = useState({
+    initialInvestment: "",
+    annualInvestment: "",
+    expectedReturn: "",
+    duration: "",
+  });
 
-  const handleResults = (data)=>{
-    setInvestmentResults(prevData =>{
-      prevData = calculateInvestmentResults(data);
-      console.log(prevData)
-      return prevData; 
-    })
+  const isDurationValid = investmentData.duration > 0 ;
+  
+  const handleChange = (inputIdentifier, newValue)=>{
+    setInvestmentData(prevData => ({
+      ...prevData, 
+      [inputIdentifier]: +newValue
+    }))
   }
+
 
   return (
   <>
     <Header />
-    <CalculatorForm results={handleResults} />
-    <Result dataForTable={investmentResults}/>
+    <CalculatorForm userInput={investmentData} onChange= {handleChange} />
+    {isDurationValid? <Result data={investmentData}/> : <p className='center'>Enter duration greater than zero.</p>}
   </>
 
   

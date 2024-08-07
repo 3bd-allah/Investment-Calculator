@@ -4,10 +4,10 @@ import logo from '../assets/investment-calculator-logo.png'
 const Header = () => {
   return (
     <>
-      <div id='header'>
-        <img src={logo} />
+      <header id='header'>
+        <img src={logo} alt="Logo showing a money bag" title='Logo' />
         <h1>Investment Calculator</h1>
-      </div>
+      </header>
     </>
   )
 }

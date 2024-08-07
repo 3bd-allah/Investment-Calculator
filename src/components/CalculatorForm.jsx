@@ -1,75 +1,43 @@
 import React, { useState } from "react";
 
-const CalculatorForm = ({results}) => {
-
-  
-  const [investmentData, setInvestmentData] = useState({
-    initialInvestment: "",
-    annualInvestment: "",
-    expectedReturn: "",
-    duration: "",
-  });
-
-  
+const CalculatorForm = ({ onChange, userInput }) => {
   return (
     <>
-      <div id="user-input" className="input-group">
-        <div>
-          <label>Initial investment</label>
-          <input type="number" 
-            value={investmentData.initialInvestment} 
-            onChange={(e)=> {
-              setInvestmentData(prevData => ({...prevData, initialInvestment:+e.target.value}));
-              if(investmentData.annualInvestment && investmentData.initialInvestment
-                 && investmentData.expectedReturn && investmentData.duration){
-                   results(investmentData)
-                 }
-            }}
-          />
-        </div>
+      <section id="user-input" >
+        <div className="input-group">
+          <p>
+            <label>Initial investment</label>
+            <input type="number" 
+              value={userInput.initialInvestment} 
+              onChange={(e)=>onChange('initialInvestment', e.target.value) }
+            />
+          </p>
 
-        <div>
-          <label>Annual investment</label>
-          <input type="number" 
-            value={investmentData.annualInvestment} 
-            onChange={(e)=> {
-              setInvestmentData(prevData => ({...prevData, annualInvestment:+e.target.value}));
-              if(investmentData.annualInvestment && investmentData.initialInvestment
-                && investmentData.expectedReturn && investmentData.duration){
-                  results(investmentData)
-                }
-            }}
-          />
-        </div>
+          <p>
+            <label>Annual investment</label>
+            <input type="number" 
+              value={userInput.annualInvestment} 
+              onChange={(e)=>onChange('annualInvestment', e.target.value)}
+            />
+          </p>
 
-        <div>
-          <label>Expected Return</label>
-          <input type="number" 
-            value={investmentData.expectedReturn} 
-            onChange={(e)=> {
-              setInvestmentData(prevData => ({...prevData, expectedReturn:+e.target.value}));
-              if(investmentData.annualInvestment && investmentData.initialInvestment
-                && investmentData.expectedReturn && investmentData.duration){
-                  results(investmentData)
-                }
-            }}
-          />
-        </div>
+          <p>
+            <label>Expected Return</label>
+            <input type="number" 
+              value={userInput.expectedReturn} 
+              onChange={(e)=>onChange('expectedReturn', e.target.value)}
+            />
+          </p>
 
-        <div>
-          <label>Duration</label>
-          <input type="number" 
-            value={investmentData.duration} 
-            onChange={(e)=> {
-              setInvestmentData(prevData => ({...prevData, duration:+e.target.value}));
-              if(investmentData.annualInvestment && investmentData.initialInvestment
-                && investmentData.expectedReturn && investmentData.duration){
-                  results(investmentData)
-                }
-              }}
-          />
+          <p>
+            <label>Duration</label>
+            <input type="number" 
+              value={userInput.duration} 
+              onChange={(e)=>onChange('duration', e.target.value)}
+            />
+          </p>
         </div>
-      </div>
+      </section>
     </>
   );
 };
