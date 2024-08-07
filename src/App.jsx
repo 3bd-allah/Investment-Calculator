@@ -12,6 +12,7 @@ function App() {
   const handleResults = (data)=>{
     setInvestmentResults(prevData =>{
       prevData = calculateInvestmentResults(data);
+      console.log(prevData)
       return prevData; 
     })
   }

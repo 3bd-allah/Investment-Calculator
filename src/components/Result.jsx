@@ -1,8 +1,9 @@
 import React from 'react'
-import {formatter} from '../util/investment'
+import {formatter} from '../util/investment.js'
 
 const Result = ({dataForTable}) => {
 
+  console.log(typeof(dataForTable))
   console.log(dataForTable)
   
   return (
@@ -18,7 +19,15 @@ const Result = ({dataForTable}) => {
       </thead>
       <tbody>
           {
-            dataForTable.map()
+            dataForTable.map((x,i) => 
+              <tr>
+                <td>{i+1}</td>
+                <td>{formatter.format(x.valueEndOfYear)}</td>
+                <td>{formatter.format(x.interest)}</td>
+                <td>{formatter.format(x.interest)}</td>
+                <td>{formatter.format(x.interest)}</td>
+              </tr>
+            )
           }
       </tbody>
     </table>

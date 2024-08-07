@@ -20,7 +20,10 @@ const CalculatorForm = ({results}) => {
             value={investmentData.initialInvestment} 
             onChange={(e)=> {
               setInvestmentData(prevData => ({...prevData, initialInvestment:+e.target.value}));
-              results(investmentData)
+              if(investmentData.annualInvestment && investmentData.initialInvestment
+                 && investmentData.expectedReturn && investmentData.duration){
+                   results(investmentData)
+                 }
             }}
           />
         </div>
@@ -31,7 +34,10 @@ const CalculatorForm = ({results}) => {
             value={investmentData.annualInvestment} 
             onChange={(e)=> {
               setInvestmentData(prevData => ({...prevData, annualInvestment:+e.target.value}));
-              results(investmentData)
+              if(investmentData.annualInvestment && investmentData.initialInvestment
+                && investmentData.expectedReturn && investmentData.duration){
+                  results(investmentData)
+                }
             }}
           />
         </div>
@@ -42,7 +48,10 @@ const CalculatorForm = ({results}) => {
             value={investmentData.expectedReturn} 
             onChange={(e)=> {
               setInvestmentData(prevData => ({...prevData, expectedReturn:+e.target.value}));
-              results(investmentData)
+              if(investmentData.annualInvestment && investmentData.initialInvestment
+                && investmentData.expectedReturn && investmentData.duration){
+                  results(investmentData)
+                }
             }}
           />
         </div>
@@ -53,7 +62,10 @@ const CalculatorForm = ({results}) => {
             value={investmentData.duration} 
             onChange={(e)=> {
               setInvestmentData(prevData => ({...prevData, duration:+e.target.value}));
-              results(investmentData)
+              if(investmentData.annualInvestment && investmentData.initialInvestment
+                && investmentData.expectedReturn && investmentData.duration){
+                  results(investmentData)
+                }
               }}
           />
         </div>
